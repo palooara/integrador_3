@@ -33,6 +33,7 @@ const Navegacion = () => {
             <div className="col d-flex gap-4">
               {usuarioLogueado ? (
                 <>
+                
                   <button className="btn btn-link nav-link text-white pt-1" onClick={cerrarSesion}>
                     Cerrar sesión
                   </button>

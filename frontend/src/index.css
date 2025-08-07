@@ -1,10 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 html, body {
   height: 100%;
   margin: 0;
+  color: #f44ab3 ;
+  background-color: #fff9fd ;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+#loginForm {
+    margin-bottom: 100px;
+    margin-top: 100px;
+}
+
+.card{
+    background-color: #fffdfd ;
+    color: #f44ab3 ;
+    border-color: #f44ab3 ;
+    font-family: 'Montserrat', sans-serif ;
+    font-size: small;
+}
+.card:hover{
+    transform: scaleX(1.05) scaleY(1.05);
+    border-color: #e644a8;
+}
+
+.card-header {
+    background-color: #ff6ac6 ; 
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px 0; 
+    margin-bottom: 0; 
+    width: 100%; 
+    text-align: center; 
+}
+
+.btn-primary {
+    background-color: #ff6ac6d2;
+    border-color: #f44ab3;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: small;
+}
+.text-primary {
+    color: #ffedf8;
+}
+
+
+.modal-content{
+    background-color: #fff8fd;
+    color: #f44ab3;
+    font-family: 'Montserrat', sans-serif;
+}
+.modal-header {
+    background-color: #f8cbe9;
+    color: #f44ab3;
+    font-family: 'Montserrat', sans-serif;
+    font-size: small;
+}
+.btn-danger, .btn-warning{
+    background-color: #bb1d7fd2;
+    border-color: #db3e9f;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: small;
+}
+
+.btn-primary:hover {
+    background-color: #e33a9c;
+    border-color: #e33a9c;
+}
+
+.card-body{
+    padding: 25px;
+}
+
+h1{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center; 
+    margin-top:15px; 
+    margin-bottom:30px;
 }

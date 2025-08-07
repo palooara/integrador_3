@@ -37,7 +37,7 @@ const Alta = ({ onNuevoProducto }) => {
 
   return (
     <div className="mb-5">
-      <h2>Alta de Producto</h2>
+      <h1>Alta de Producto</h1>
       {mensaje && <div className="alert alert-danger">{mensaje}</div>}
 
       <form onSubmit={handleSubmit}>
@@ -78,7 +78,7 @@ const Alta = ({ onNuevoProducto }) => {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Descripción</label>
+          <label className="form-label ">Descripción</label>
           <input
             type="text"
             className="form-control"
@@ -89,9 +89,12 @@ const Alta = ({ onNuevoProducto }) => {
           />
         </div>
 
+        <div className="d-flex justify-content-between pt-3">
+
         <button type="submit" className="btn btn-primary">Agregar Producto</button>
 
-        <Link  to="/productos">Lista de productos</Link>
+        <Link className="" to="/productos">Lista de productos</Link>
+        </div>
       </form>
     </div>
   );
