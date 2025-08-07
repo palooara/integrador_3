@@ -1,0 +1,5 @@
+
+{
+    "ext": ".js, .mjs, .hbs, .cjs, .json",
+    "exec": "node server.js"
+}
