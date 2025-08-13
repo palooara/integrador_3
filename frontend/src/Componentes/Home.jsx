@@ -1,4 +1,4 @@
-const Home = ({ productos = [] }) => {
+const Home = ({ productos = [], carrito, setCarrito }) => {
   return (
     <div className="container">
       <h1 className="text-center my-4">Servicios</h1>
@@ -18,7 +18,10 @@ const Home = ({ productos = [] }) => {
                 <div className="card-body text-center">
                   <p className="card-text">{p.descripcion}</p>
                   <p className="fw-bold">${p.precio}</p>
-                  <button className="btn btn-primary w-100">
+                  <button
+                    className="btn btn-primary w-100"
+                    onClick={() => setCarrito([...carrito, p])}
+                  >
                     Agregar Servicio
                   </button>
                 </div>

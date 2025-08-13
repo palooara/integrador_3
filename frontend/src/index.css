@@ -41,7 +41,13 @@ html, body {
     text-align: center; 
 }
 
-.btn-primary {
+.logo-navbar { width: 50px; height: 60px; }
+
+@media (min-width: 992px) {
+  .logo-navbar { width: 65px; height: 75px; }
+}
+
+.btn-primary, .btn-primary:disabled {
     background-color: #ff6ac6d2;
     border-color: #f44ab3;
     font-size: 12px;

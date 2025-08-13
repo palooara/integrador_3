@@ -1,7 +1,7 @@
 import './index.css';
 import { useState, useEffect } from "react";
 import axios from "axios";
-import {Routes, Route}  from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Navegacion from './Componentes/Navegacion';
 import Footer from './Componentes/Footer';
 import Home from './Componentes/Home';
@@ -11,11 +11,9 @@ import Login from './Componentes/Login';
 import Productos from './Componentes/Productos';
 import Registro from './Componentes/Registro';
 
-
-
 function App() {
-
   const [productos, setProductos] = useState([]);
+  const [carrito, setCarrito] = useState([]);
   const [logueado, setLogueado] = useState(false);
 
   useEffect(() => {
@@ -27,31 +25,26 @@ function App() {
       .catch(err => console.error(err));
   }, []);
 
-  // Agrega un nuevo producto al estado actual sin recargar
   const agregarProducto = (nuevoProducto) => {
     setProductos(prev => [...prev, nuevoProducto]);
   };
 
   return (
     <>
-      <Navegacion />
+      <Navegacion carrito={carrito} setCarrito={setCarrito} />
       <main style={{ flex: 1 }} className="container my-4">
-
-        
-
         <Routes>
-          <Route path="/" element={<Home productos={productos} />} />
+          <Route path="/" element={<Home productos={productos} carrito={carrito} setCarrito={setCarrito} />} />
           <Route path="/alta" element={<Alta onNuevoProducto={agregarProducto} />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/productos" element= {<Productos />} />
-          <Route path="/registro" element= {<Registro />} />
+          <Route path="/productos" element={<Productos />} />
+          <Route path="/registro" element={<Registro />} />
         </Routes>
       </main>
       <Footer />
     </>
   );
 }
-
 
 export default App;
