@@ -9,6 +9,9 @@ const { envioProductos,
         traerProductos
 
  } = require('../controllers/controllerDatosProductos');
+ const {
+     agregarCarrito
+ } = require('../controllers/carritoController');
 
  router.post('/productos', envioProductos);
  router.get('/productos', traerProductos);
@@ -19,13 +22,8 @@ const { envioProductos,
 // Rutas para api/carrito
 // Aquí se manejan las operaciones del carrito de compras
 
- const {
-     agregarCarrito,
-     mostrarCarrito
- } = require('../controllers/carritoController');
 
-router.get('/carrito', mostrarCarrito);  // GET /carrito
-router.post('/carrito', agregarCarrito); // Agregar producto
+router.post('/carrito',agregarCarrito); // Agregar producto
 
 module.exports = router;
 

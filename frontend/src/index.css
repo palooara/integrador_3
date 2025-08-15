@@ -45,7 +45,19 @@ html, body {
 
 @media (min-width: 992px) {
   .logo-navbar { width: 65px; height: 75px; }
+
+
 }
+
+.navbar-toggler::before,
+.navbar-toggler::after {
+  width: 24px;
+  height: 2px;
+  position: absolute;
+  left: 0;
+}
+
+
 
 .btn-primary, .btn-primary:disabled {
     background-color: #ff6ac6d2;

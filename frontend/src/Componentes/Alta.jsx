@@ -91,9 +91,9 @@ const Alta = ({ onNuevoProducto }) => {
 
         <div className="d-flex justify-content-between pt-3">
 
-        <button type="submit" className="btn btn-primary">Agregar Producto</button>
+          <button type="submit" className="btn btn-primary">Agregar Producto</button>
 
-        <Link className="" to="/productos">Lista de productos</Link>
+          <Link className="" to="/productos">Lista de productos</Link>
         </div>
       </form>
     </div>

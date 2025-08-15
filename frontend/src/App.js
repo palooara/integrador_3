@@ -14,13 +14,13 @@ import Registro from './Componentes/Registro';
 function App() {
   const [productos, setProductos] = useState([]);
   const [carrito, setCarrito] = useState([]);
-  const [logueado, setLogueado] = useState(false);
+  const [usuario, setUsuario] = useState(localStorage.getItem("usuario"));
+  const [rol, setRol] = useState(localStorage.getItem("role"));
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/productos', { withCredentials: true })
       .then(res => {
         setProductos(res.data.productos);
-        setLogueado(res.data.usuarioLogueado);
       })
       .catch(err => console.error(err));
   }, []);
@@ -31,13 +31,20 @@ function App() {
 
   return (
     <>
-      <Navegacion carrito={carrito} setCarrito={setCarrito} />
+      <Navegacion
+        carrito={carrito}
+        setCarrito={setCarrito}
+        usuario={usuario}
+        setUsuario={setUsuario}
+        rol={rol}
+        setRol={setRol}
+      />
       <main style={{ flex: 1 }} className="container my-4">
         <Routes>
           <Route path="/" element={<Home productos={productos} carrito={carrito} setCarrito={setCarrito} />} />
           <Route path="/alta" element={<Alta onNuevoProducto={agregarProducto} />} />
           <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setUsuario={setUsuario} setRol={setRol} />} />
           <Route path="/productos" element={<Productos />} />
           <Route path="/registro" element={<Registro />} />
         </Routes>
