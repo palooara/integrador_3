@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import logo from './images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../axiosConfig';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -37,10 +37,9 @@ const Navegacion = ({ carrito, setCarrito, usuario, setUsuario, rol, setRol }) =
 
   setGuardando(true);
   try {
-    await axios.post(
-      "https://integrador-3-spod.onrender.com/api/carrito",
+    await api.post(
+      "/api/carrito",
       { productos: carrito },
-      { withCredentials: true }
     );
     alert("Turno agendado con éxito.");
     setCarrito([]);

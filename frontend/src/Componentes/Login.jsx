@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = ({ setUsuario, setRol }) => {
@@ -18,10 +18,9 @@ const Login = ({ setUsuario, setRol }) => {
     }
 
     try {
-      const res = await axios.post(
-        "https://integrador-3-spod.onrender.com/auth/login",
+      const res = await api.post(
+        "/auth/login",
         form,
-        { withCredentials: true } // 👈 MUY IMPORTANTE
       );
 
       // Guardamos datos en localStorage para el navbar

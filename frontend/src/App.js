@@ -1,6 +1,6 @@
 import './index.css';
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from './axiosConfig';
 import { Routes, Route } from 'react-router-dom';
 import Navegacion from './Componentes/Navegacion';
 import Footer from './Componentes/Footer';
@@ -18,7 +18,7 @@ function App() {
   const [rol, setRol] = useState(localStorage.getItem("role"));
 
   useEffect(() => {
-  axios.get('https://integrador-3-spod.onrender.com/auth/me', { withCredentials: true })
+  api.get("/auth/me")
     .then(res => {
       setUsuario(res.data.nombre);
       setRol(res.data.role);

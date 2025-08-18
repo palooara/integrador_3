@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../axiosConfig";
 
 const Productos = () => {
   const [productos, setProductos] = useState([]);
@@ -18,7 +18,7 @@ const Productos = () => {
 
   const traerProductos = async () => {
     try {
-      const res = await axios.get("https://integrador-3-spod.onrender.com/api/productos", { withCredentials: true });
+      const res = await api.get("/api/productos");
       if (Array.isArray(res.data)) {
         setProductos(res.data);
       } else if (Array.isArray(res.data.productos)) {
@@ -35,7 +35,7 @@ const Productos = () => {
   const eliminarProducto = async (id) => {
     if (!window.confirm("¿Seguro que querés eliminar este producto?")) return;
     try {
-      await axios.delete(`https://integrador-3-spod.onrender.com/api/productos/${id}`, { withCredentials: true });
+      await api.delete(`/api/productos/${id}`);
       setMensaje("Producto eliminado ✅");
       setProductos(productos.filter((prod) => prod._id !== id));
     } catch (error) {
@@ -63,14 +63,13 @@ const Productos = () => {
 
   const guardarCambios = async () => {
     try {
-      await axios.put(
-        `https://integrador-3-spod.onrender.com/api/productos/${productoEditando._id}`,
+      await api.put(
+        `/api/productos/${productoEditando._id}`,
         {
           nombre: productoEditando.nombre,
           descripcion: productoEditando.descripcion,
           precio: productoEditando.precio,
-        },
-        { withCredentials: true }
+        }
       );
       setMensaje("Producto actualizado ✅");
       setProductos((prev) =>

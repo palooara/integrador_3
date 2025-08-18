@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import axios from "axios";
+import api from "../axiosConfig";
 import { Link, useNavigate } from "react-router-dom";
 
 const Registro = () => {
@@ -25,7 +25,7 @@ const Registro = () => {
     }
 
     try {
-      const res = await axios.post('https://integrador-3-spod.onrender.com/auth/registro', form, { withCredentials: true });
+      const res = await api.post("/auth/registro", form);
       console.log(res.data);
       setMensaje('✅ Usuario registrado correctamente.');
       setForm({ email: '', password: '', nombre: '', telefono: '' });

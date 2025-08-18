@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../axiosConfig';
 import { Link } from 'react-router-dom';
 
 const Alta = ({ onNuevoProducto }) => {
@@ -25,7 +25,7 @@ const Alta = ({ onNuevoProducto }) => {
     }
 
     try {
-      const res = await axios.post('https://integrador-3-spod.onrender.com/api/productos', form, { withCredentials: true });
+      const res = await api.post("/api/productos", form);
       setMensaje('✅ Producto creado correctamente.');
       onNuevoProducto(res.data.producto); // Agregar al home
       setForm({ nombre: '', precio: '', categoria: '', descripcion: '' });
