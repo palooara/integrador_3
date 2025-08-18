@@ -18,20 +18,12 @@ function App() {
   const [rol, setRol] = useState(localStorage.getItem("role"));
 
   useEffect(() => {
-  api.get("/auth/me")
-    .then(res => {
-      setUsuario(res.data.nombre);
-      setRol(res.data.role);
-      localStorage.setItem("usuario", res.data.nombre);
-      localStorage.setItem("role", res.data.role);
-    })
-    .catch(() => {
-      setUsuario(null);
-      setRol(null);
-      localStorage.removeItem("usuario");
-      localStorage.removeItem("role");
-    });
-}, []);
+    api.get("/api/productos")
+      .then(res => {
+        setProductos(res.data.productos);
+      })
+      .catch(err => console.error(err));
+  }, []);
 
   const agregarProducto = (nuevoProducto) => {
     setProductos(prev => [...prev, nuevoProducto]);
