@@ -3,10 +3,10 @@
 const express = require('express'); 
 const morgan = require('morgan');
 const path = require('path'); 
+const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const cors = require('cors');
 require('dotenv').config(); 
-const session = require('express-session');
 
 //2.Creamos el servidor
 const app = express(); 
@@ -29,10 +29,12 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24, // 1 día
       httpOnly: true,
-      secure: false, // en producción HTTPS = true
+      secure: true, 
+      sameSite: 'none',
     },
     store: MongoStore.create({
       mongoUrl: process.env.MONGO_ATLAS,
+      mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
       ttl: 14 * 24 * 60 * 60, // 14 días
     }),
   })
