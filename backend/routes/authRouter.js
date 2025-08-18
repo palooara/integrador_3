@@ -13,7 +13,7 @@ router.post('/registro', registrar);
 
 router.post('/logout', logout);
 
-app.get("/me", (req, res) => {
+router.get("/me", (req, res) => {
   if (req.session.usuario) {
     return res.json({ nombre: req.session.usuario.nombre, role: req.session.usuario.role });
   } else {
