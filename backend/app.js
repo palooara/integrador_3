@@ -13,9 +13,10 @@ const app = express();
 
 //3. Middlewares
 app.use(cors({
-  origin: 'https://integrador-3-rose.vercel.app', // frontend en Vercel
-  credentials: true, 
+  origin: 'https://integrador-3-rose.vercel.app',
+  credentials: true
 }));
+
 
 
 app.use(
