@@ -33,7 +33,9 @@ app.use(session({
     ttl: 60 * 60 * 24 // sesión dura 1 día (en segundos)
   }),
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 // cookie también dura 1 día
+    httpOnly: true,
+    secure: true,        
+    sameSite: "none" 
   }
 }));
 

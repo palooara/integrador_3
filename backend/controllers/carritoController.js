@@ -11,8 +11,6 @@ const agregarCarrito = async (req, res) => {
       return res.status(401).json({ error: "No autenticado" });
     }
 
-    // 1. Borrar carritos anteriores del usuario
-    await Carrito.deleteMany({ usuarioId });
 
     // 2. Guardar nuevo carrito
     const nuevoCarrito = new Carrito({ productos, usuarioId });
