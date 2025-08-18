@@ -1,77 +1,72 @@
 //Configuramos nuestro servidor
 //1. Librerías
-
-const express = require('express'); //framework para crear servidores
-const morgan = require('morgan');// middleware para registrar las peticiones HTTP
-const path = require('path'); //librería para trabajar con rutas
+const express = require('express'); 
+const morgan = require('morgan');
+const path = require('path'); 
 const MongoStore = require('connect-mongo');
 const cors = require('cors');
 require('dotenv').config(); 
 const session = require('express-session');
 
-
 //2.Creamos el servidor
 const app = express(); 
 
-
-
-//3.Aplicamos los middlewares
+//3. Middlewares
 app.use(cors({
-  origin: 'https://integrador-3-rose.vercel.app',
+  origin: 'https://integrador-3-rose.vercel.app', // frontend en Vercel
   credentials: true, 
 }));
 
-app.use(morgan('dev')); //registrar las peticiones HTTP en la consola
-app.use(express.json()); //parsear el cuerpo de las peticiones a JSON
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(session({
-  secret: process.env.SESSION_SECRET, 
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGO_ATLAS,
-    ttl: 60 * 60 * 24 // sesión dura 1 día (en segundos)
-  }),
-  cookie: {
-    httpOnly: true,
-    secure: true,        
-    sameSite: "none" 
-  }
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, // 1 día
+      httpOnly: true,
+      secure: false, // en producción HTTPS = true
+    },
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+      ttl: 14 * 24 * 60 * 60, // 14 días
+    }),
+  })
+);
 
+// Middleware para pasar datos de sesión a las vistas (si usas Handlebars/EJS)
 app.use((req, res, next) => {
   res.locals.usuarioLogueado = req.session.usuarioId || null;
   res.locals.nombreUsuario = req.session.nombreUsuario || null;
   next();
 });
 
-app.use(express.urlencoded({ extended: true })); //parsear el cuerpo de las peticiones a URL-encoded
+//4. Archivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static(path.join(__dirname, 'public'))); //servir archivos estáticos desde la carpeta public
+//5. Importamos las rutas
+const apiRouter = require('./routes/datosProductosRouter');
+const authRouter = require('./routes/authRouter');
+const pagesRouter = require('./routes/pagesRouter');
 
+//6. Usamos las rutas
+app.use('/api', apiRouter);
+app.use('/auth', authRouter);
+app.use('/', pagesRouter);
 
-// 6. Importamos las rutas
-const apiRouter = require('./routes/datosProductosRouter'); //rutas de la API
-const authRouter = require('./routes/authRouter'); //rutas de autenticación
-const pagesRouter = require('./routes/pagesRouter');// rutas a las páginas
-
-//7. Usamos las rutas
-app.use('/api', apiRouter); //rutas de la API
-app.use('/auth', authRouter); //rutas de autenticación
-app.use('/', pagesRouter); // rutas a las páginas
-
-//8. Middleware para manejar errores 404 y 500
-// Middleware para manejar rutas no encontradas
+//7. Errores 404 y 500
 app.use((req, res) =>{
     console.log('Ruta no encontrada:' + req.url);
-    res.status(404).send('<h1>404-Página no encontrada</h1>');
+    res.status(404).send('<h1>404 - Página no encontrada</h1>');
 });
 
-
-// Middleware para manejar errores internos del servidor
 app.use((err, req, res, next) => {
-    console.error( err.stack);
-    res.status(500).send('<h1>500-Error interno del servidor</h1>');
+    console.error(err.stack);
+    res.status(500).send('<h1>500 - Error interno del servidor</h1>');
 });
 
 //Exportamos el servidor

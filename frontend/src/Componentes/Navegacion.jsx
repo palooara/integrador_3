@@ -34,7 +34,7 @@ const Navegacion = ({ carrito, setCarrito, usuario, setUsuario, rol, setRol }) =
       await axios.post(
         "https://integrador-3-spod.onrender.com/api/carrito",
         { productos: carrito },
-        { withCredentials: true }
+        { withCredentials: true },
       );
       alert("Turno agendado con éxito.");
       setCarrito([]);
