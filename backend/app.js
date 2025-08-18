@@ -32,7 +32,7 @@ app.use(
       secure: false, // en producción HTTPS = true
     },
     store: MongoStore.create({
-      mongoUrl: process.env.MONGO_URI,
+      mongoUrl: process.env.MONGO_ATLAS,
       ttl: 14 * 24 * 60 * 60, // 14 días
     }),
   })
