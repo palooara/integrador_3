@@ -25,7 +25,7 @@ const Alta = ({ onNuevoProducto }) => {
     }
 
     try {
-      const res = await axios.post('https://integrador-3-spod.onrender.com/api/productos', form);
+      const res = await axios.post('https://integrador-3-spod.onrender.com/api/productos', form, { withCredentials: true });
       setMensaje('✅ Producto creado correctamente.');
       onNuevoProducto(res.data.producto); // Agregar al home
       setForm({ nombre: '', precio: '', categoria: '', descripcion: '' });

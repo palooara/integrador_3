@@ -18,7 +18,7 @@ const Productos = () => {
 
   const traerProductos = async () => {
     try {
-      const res = await axios.get("https://integrador-3-spod.onrender.com/api/productos");
+      const res = await axios.get("https://integrador-3-spod.onrender.com/api/productos", { withCredentials: true });
       if (Array.isArray(res.data)) {
         setProductos(res.data);
       } else if (Array.isArray(res.data.productos)) {
@@ -35,7 +35,7 @@ const Productos = () => {
   const eliminarProducto = async (id) => {
     if (!window.confirm("¿Seguro que querés eliminar este producto?")) return;
     try {
-      await axios.delete(`https://integrador-3-spod.onrender.com/api/productos/${id}`);
+      await axios.delete(`https://integrador-3-spod.onrender.com/api/productos/${id}`, { withCredentials: true });
       setMensaje("Producto eliminado ✅");
       setProductos(productos.filter((prod) => prod._id !== id));
     } catch (error) {
@@ -69,7 +69,8 @@ const Productos = () => {
           nombre: productoEditando.nombre,
           descripcion: productoEditando.descripcion,
           precio: productoEditando.precio,
-        }
+        },
+        { withCredentials: true }
       );
       setMensaje("Producto actualizado ✅");
       setProductos((prev) =>
