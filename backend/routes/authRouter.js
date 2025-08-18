@@ -11,7 +11,7 @@ router.post('/login', login);
 
 router.post('/registro', registrar);
 
-router.get('/logout', logout);
+router.post('/logout', logout);
 
 // router.post('/admin', adminApp);
 module.exports = router;

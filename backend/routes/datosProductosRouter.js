@@ -27,4 +27,3 @@ router.post('/carrito',agregarCarrito); // Agregar producto
 
 module.exports = router;
 
-
