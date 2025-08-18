@@ -18,7 +18,7 @@ const Productos = () => {
 
   const traerProductos = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/productos");
+      const res = await axios.get("https://integrador-3-spod.onrender.com/api/productos");
       if (Array.isArray(res.data)) {
         setProductos(res.data);
       } else if (Array.isArray(res.data.productos)) {
@@ -35,7 +35,7 @@ const Productos = () => {
   const eliminarProducto = async (id) => {
     if (!window.confirm("¿Seguro que querés eliminar este producto?")) return;
     try {
-      await axios.delete(`http://localhost:3000/api/productos/${id}`);
+      await axios.delete(`https://integrador-3-spod.onrender.com/api/productos/${id}`);
       setMensaje("Producto eliminado ✅");
       setProductos(productos.filter((prod) => prod._id !== id));
     } catch (error) {
