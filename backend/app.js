@@ -42,13 +42,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Middleware para pasar datos de sesión a las vistas (si usas Handlebars/EJS)
-app.use((req, res, next) => {
-  res.locals.usuarioLogueado = req.session.usuarioId || null;
-  res.locals.nombreUsuario = req.session.nombreUsuario || null;
-  next();
-});
-
 //4. Archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 

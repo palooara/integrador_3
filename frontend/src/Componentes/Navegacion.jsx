@@ -40,16 +40,8 @@ const Navegacion = ({ carrito, setCarrito, usuario, setUsuario, rol, setRol }) =
       setCarrito([]);
       cerrarModal();
     } catch (err) {
-      console.error(err);
-      if (err.response?.status === 401) {
-        alert("Debes iniciar sesión para agendar un turno.");
-        cerrarModal();
-        navigate('/login');
-      } else if (err.response?.status === 500) {
-        alert("Ocurrió un error interno al guardar el turno. Intenta más tarde.");
-      } else {
-        alert(`Error al guardar el turno: ${err.response?.statusText}`);
-      }
+      console.error("Error al guardar el carrito:", err);
+      alert("Error al agendar el turno. Intente nuevamente.");
     } finally {
       setGuardando(false);
     }

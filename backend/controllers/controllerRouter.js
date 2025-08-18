@@ -6,7 +6,9 @@ const homeApp = async (req, res) => {
 
     res.json({
       productos,
-      usuarioLogueado: !!req.session.usuarioId,
+      
+      usuarioLogueado: !!req.session?.usuarioId
+
     });
   } catch (error) {
     res.status(500).json({ error: 'Error al cargar productos' });
