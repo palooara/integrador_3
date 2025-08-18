@@ -18,12 +18,20 @@ function App() {
   const [rol, setRol] = useState(localStorage.getItem("role"));
 
   useEffect(() => {
-    axios.get('https://integrador-3-spod.onrender.com/api/productos', { withCredentials: true })
-      .then(res => {
-        setProductos(res.data.productos);
-      })
-      .catch(err => console.error(err));
-  }, []);
+  axios.get('https://integrador-3-spod.onrender.com/auth/me', { withCredentials: true })
+    .then(res => {
+      setUsuario(res.data.nombre);
+      setRol(res.data.role);
+      localStorage.setItem("usuario", res.data.nombre);
+      localStorage.setItem("role", res.data.role);
+    })
+    .catch(() => {
+      setUsuario(null);
+      setRol(null);
+      localStorage.removeItem("usuario");
+      localStorage.removeItem("role");
+    });
+}, []);
 
   const agregarProducto = (nuevoProducto) => {
     setProductos(prev => [...prev, nuevoProducto]);

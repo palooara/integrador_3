@@ -28,24 +28,30 @@ const Navegacion = ({ carrito, setCarrito, usuario, setUsuario, rol, setRol }) =
   };
 
   const agendarTurno = async () => {
-    if (carrito.length === 0) return;
-    setGuardando(true);
-    try {
-      await axios.post(
-        "https://integrador-3-spod.onrender.com/api/carrito",
-        { productos: carrito },
-        { withCredentials: true },
-      );
-      alert("Turno agendado con éxito.");
-      setCarrito([]);
-      cerrarModal();
-    } catch (err) {
-      console.error("Error al guardar el carrito:", err);
-      alert("Error al agendar el turno. Intente nuevamente.");
-    } finally {
-      setGuardando(false);
-    }
-  };
+  if (!usuario) {
+    alert("Debes iniciar sesión para agendar un turno.");
+    return;
+  }
+
+  if (carrito.length === 0) return;
+
+  setGuardando(true);
+  try {
+    await axios.post(
+      "https://integrador-3-spod.onrender.com/api/carrito",
+      { productos: carrito },
+      { withCredentials: true }
+    );
+    alert("Turno agendado con éxito.");
+    setCarrito([]);
+    cerrarModal();
+  } catch (err) {
+    console.error("Error al guardar el carrito:", err);
+    alert("Error al agendar el turno. Intente nuevamente.");
+  } finally {
+    setGuardando(false);
+  }
+};
 
   const productosAgrupados = carrito.reduce((acc, prod) => {
     if (!acc[prod.nombre]) acc[prod.nombre] = { ...prod, cantidad: 1 };
