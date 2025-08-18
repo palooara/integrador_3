@@ -16,7 +16,7 @@ const Login = ({ setUsuario, setRol }) => {
             return;
         }
         try {
-            const res = await axios.post('http://localhost:3000/auth/login', form, { withCredentials: true });
+            const res = await axios.post('https://integrador-3-spod.onrender.com/auth/login', form, { withCredentials: true });
             localStorage.setItem("usuario", res.data.nombre);
             localStorage.setItem("role", res.data.role);
             setUsuario(res.data.nombre);

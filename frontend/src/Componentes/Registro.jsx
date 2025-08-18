@@ -25,7 +25,7 @@ const Registro = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:3000/auth/registro', form, { withCredentials: true });
+      const res = await axios.post('https://integrador-3-spod.onrender.com/auth/registro', form, { withCredentials: true });
       console.log(res.data);
       setMensaje('✅ Usuario registrado correctamente.');
       setForm({ email: '', password: '', nombre: '', telefono: '' });

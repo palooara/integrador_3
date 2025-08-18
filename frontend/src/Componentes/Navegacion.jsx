@@ -32,7 +32,7 @@ const Navegacion = ({ carrito, setCarrito, usuario, setUsuario, rol, setRol }) =
     setGuardando(true);
     try {
       await axios.post(
-        "http://localhost:3000/api/carrito",
+        "https://integrador-3-spod.onrender.com/api/carrito",
         { productos: carrito },
         { withCredentials: true }
       );

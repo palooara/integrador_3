@@ -18,7 +18,7 @@ function App() {
   const [rol, setRol] = useState(localStorage.getItem("role"));
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/productos', { withCredentials: true })
+    axios.get('https://integrador-3-spod.onrender.com/api/productos', { withCredentials: true })
       .then(res => {
         setProductos(res.data.productos);
       })

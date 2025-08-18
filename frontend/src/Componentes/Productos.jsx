@@ -64,7 +64,7 @@ const Productos = () => {
   const guardarCambios = async () => {
     try {
       await axios.put(
-        `http://localhost:3000/api/productos/${productoEditando._id}`,
+        `https://integrador-3-spod.onrender.com/api/productos/${productoEditando._id}`,
         {
           nombre: productoEditando.nombre,
           descripcion: productoEditando.descripcion,
