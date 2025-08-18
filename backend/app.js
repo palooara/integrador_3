@@ -17,7 +17,7 @@ const app = express();
 
 //3.Aplicamos los middlewares
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://integrador-3-rose.vercel.app',
   credentials: true, 
 }));
 
