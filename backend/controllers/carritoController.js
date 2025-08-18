@@ -6,6 +6,7 @@ const agregarCarrito = async (req, res) => {
   try {
     const { productos } = req.body;
     const usuarioId = req.session.usuarioId;
+    const nombreUsuario = req.session.nombreUsuario;
 
     if (!usuarioId) {
       return res.status(401).json({ error: "No autenticado" });
